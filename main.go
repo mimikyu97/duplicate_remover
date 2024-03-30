@@ -18,7 +18,7 @@ func main() {
 	//open file
 	file, err := os.Open(address)
 	if err != nil {
-		log.Fatal("error has occured in file opening")
+		log.Fatal("error has occured in file opening", err)
 		return
 	}
 	defer file.Close()
@@ -38,7 +38,7 @@ func main() {
 	//create file
 	file, err = os.Create("remove_duplicated_file.txt")
 	if err != nil {
-		log.Fatal("error has been occured in creating file")
+		log.Fatal("error has been occured in creating file", err)
 		return
 	}
 	defer file.Close()
@@ -47,7 +47,7 @@ func main() {
 	for key := range duplicate {
 		_, err := file.WriteString(key + "\n")
 		if err != nil {
-			fmt.Println("Error writing to file:", err)
+			log.Fatal("Error writing to file:", err)
 			return
 		}
 	}
